@@ -1,6 +1,125 @@
-!function(t){var e={};function n(r){if(e[r])return e[r].exports;var o=e[r]={i:r,l:!1,exports:{}};return t[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}n.m=t,n.c=e,n.d=function(t,e,r){n.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:r})},n.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},n.t=function(t,e){if(1&e&&(t=n(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var r=Object.create(null);if(n.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var o in t)n.d(r,o,function(e){return t[e]}.bind(null,o));return r},n.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return n.d(e,"a",e),e},n.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},n.p="",n(n.s=0)}([function(t,e,n){"use strict";n.r(e);n(1);let r=[];function o(t,e){return Math.random()*(e-t)+t}function a(t){const e=255,n=o(100,150),r=50,a=o(0,1);return{x:-2,y:-2,diameter:o(1,3),duration:o(9e3,9500),amplitude:o(50,150),offsetY:o(-100,100),arc:o(6,7),startTime:performance.now()-o(0,1e4),colour:`rgba(${e}, ${n}, ${r}, ${a})`}}function i(t,e,n){r.forEach((n,o)=>{r[o]=function(t,e,n){const r=(n-t.startTime)%t.duration/t.duration;return{...t,x:r*e.width,y:Math.sin(r*t.arc)*t.amplitude+e.height/2+t.offsetY}}(n,e,t)}),n.clearRect(0,0,e.width,e.height),r.forEach(t=>{!function(t,e){e.fillStyle=t.colour,e.beginPath(),e.ellipse(t.x,t.y,t.diameter,t.diameter,0,0,2*Math.PI),e.fill()}(t,n)}),requestAnimationFrame(t=>i(t,e,n))}function c(){return canvas=document.getElementById("particle-canvas"),canvas.width=canvas.offsetWidth,canvas.height=canvas.offsetHeight,ctx=canvas.getContext("2d"),[canvas,ctx]}function u(){const[t,e]=c();for(let t=0;t<10;t++)r.push(a());requestAnimationFrame(n=>i(n,t,e))}"loading"!==document.readystate?u():document.addEventListener("DOMContentLoaded",()=>{u()})},function(t,e,n){"use strict";var r=n(2);function o(t){if(t=r({mean:0,dev:1,pool:[]},t),Array.isArray(t.pool)&&t.pool.length>0)return function(t){var e=0;do{var n=Math.round(o({mean:t.mean,dev:t.dev}));if(n<t.pool.length&&n>=0)return t.pool[n];e++}while(e<100)}(t);var e,n,a,i=t.mean,c=t.dev;do{e=(n=2*Math.random()-1)*n+(a=2*Math.random()-1)*a}while(e>=1);return c*(n*Math.sqrt(-2*Math.log(e)/e))+i}t.exports=o},function(t,e,n){"use strict";
-/*
-object-assign
-(c) Sindre Sorhus
-@license MIT
-*/var r=Object.getOwnPropertySymbols,o=Object.prototype.hasOwnProperty,a=Object.prototype.propertyIsEnumerable;function i(t){if(null==t)throw new TypeError("Object.assign cannot be called with null or undefined");return Object(t)}t.exports=function(){try{if(!Object.assign)return!1;var t=new String("abc");if(t[5]="de","5"===Object.getOwnPropertyNames(t)[0])return!1;for(var e={},n=0;n<10;n++)e["_"+String.fromCharCode(n)]=n;if("0123456789"!==Object.getOwnPropertyNames(e).map(function(t){return e[t]}).join(""))return!1;var r={};return"abcdefghijklmnopqrst".split("").forEach(function(t){r[t]=t}),"abcdefghijklmnopqrst"===Object.keys(Object.assign({},r)).join("")}catch(t){return!1}}()?Object.assign:function(t,e){for(var n,c,u=i(t),f=1;f<arguments.length;f++){for(var l in n=Object(arguments[f]))o.call(n,l)&&(u[l]=n[l]);if(r){c=r(n);for(var s=0;s<c.length;s++)a.call(n,c[s])&&(u[c[s]]=n[c[s]])}}return u}}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./index.ts");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./index.ts":
+/*!******************!*\
+  !*** ./index.ts ***!
+  \******************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var random_normal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! random-normal */ \"./node_modules/random-normal/index.js\");\n/* harmony import */ var random_normal__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(random_normal__WEBPACK_IMPORTED_MODULE_0__);\n\nconst NUM_PARTICLES = 600;\nconst PARTICLE_SIZE = 0.4;\nconst SPEED = 20000;\n;\nlet particles = [];\nfunction rand(low, high) {\n    return Math.random() * (high - low) + low;\n}\nfunction createParticle() {\n    const colour = {\n        r: 255,\n        g: random_normal__WEBPACK_IMPORTED_MODULE_0___default()({ mean: 125, dev: 20 }),\n        b: 50,\n        a: rand(0, 1),\n    };\n    return {\n        x: -2,\n        y: -2,\n        diameter: Math.max(0, random_normal__WEBPACK_IMPORTED_MODULE_0___default()({ mean: PARTICLE_SIZE, dev: PARTICLE_SIZE / 2 })),\n        duration: random_normal__WEBPACK_IMPORTED_MODULE_0___default()({ mean: SPEED, dev: SPEED * 0.1 }),\n        amplitude: random_normal__WEBPACK_IMPORTED_MODULE_0___default()({ mean: 16, dev: 2 }),\n        offsetY: random_normal__WEBPACK_IMPORTED_MODULE_0___default()({ mean: 0, dev: 10 }),\n        arc: random_normal__WEBPACK_IMPORTED_MODULE_0___default()({ mean: Math.PI * 2, dev: 0.1 }),\n        startTime: performance.now() - rand(0, SPEED),\n        colour: `rgba(${colour.r}, ${colour.g}, ${colour.b}, ${colour.a})`,\n    };\n}\nfunction moveParticle(particle, time) {\n    const progress = ((time - particle.startTime) % particle.duration) / particle.duration;\n    return Object.assign({}, particle, { x: progress, y: ((Math.sin(progress * particle.arc) * particle.amplitude) + particle.offsetY) });\n}\nfunction drawParticle(particle, canvas, ctx) {\n    canvas = document.getElementById('particle-canvas');\n    const vh = canvas.height / 100;\n    ctx.fillStyle = particle.colour;\n    ctx.beginPath();\n    ctx.ellipse(particle.x * canvas.width, particle.y * vh + (canvas.height / 2), particle.diameter * vh, particle.diameter * vh, 0, 0, 2 * Math.PI);\n    ctx.fill();\n}\nfunction draw(time, canvas, ctx) {\n    // Move particles\n    particles.forEach((particle, index) => {\n        particles[index] = moveParticle(particle, time);\n    });\n    // Clear the canvas\n    ctx.clearRect(0, 0, canvas.width, canvas.height);\n    // Draw the particles\n    particles.forEach((particle) => {\n        drawParticle(particle, canvas, ctx);\n    });\n    // Schedule next frame\n    requestAnimationFrame((time) => draw(time, canvas, ctx));\n}\nfunction initializeCanvas() {\n    let canvas = document.getElementById('particle-canvas');\n    canvas.width = canvas.offsetWidth * window.devicePixelRatio;\n    canvas.height = canvas.offsetHeight * window.devicePixelRatio;\n    let ctx = canvas.getContext(\"2d\");\n    window.addEventListener('resize', () => {\n        canvas.width = canvas.offsetWidth * window.devicePixelRatio;\n        canvas.height = canvas.offsetHeight * window.devicePixelRatio;\n        ctx = canvas.getContext(\"2d\");\n    });\n    return [canvas, ctx];\n}\nfunction startAnimation() {\n    const [canvas, ctx] = initializeCanvas();\n    // Create a bunch of particles\n    for (let i = 0; i < NUM_PARTICLES; i++) {\n        particles.push(createParticle());\n    }\n    requestAnimationFrame((time) => draw(time, canvas, ctx));\n}\n;\n// Start animation when document is loaded\n(function () {\n    if (document.readyState !== 'loading') {\n        startAnimation();\n    }\n    else {\n        document.addEventListener('DOMContentLoaded', () => {\n            startAnimation();\n        });\n    }\n}());\n\n\n//# sourceURL=webpack:///./index.ts?");
+
+/***/ }),
+
+/***/ "./node_modules/object-assign/index.js":
+/*!*********************************************!*\
+  !*** ./node_modules/object-assign/index.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("/*\nobject-assign\n(c) Sindre Sorhus\n@license MIT\n*/\n\n\n/* eslint-disable no-unused-vars */\nvar getOwnPropertySymbols = Object.getOwnPropertySymbols;\nvar hasOwnProperty = Object.prototype.hasOwnProperty;\nvar propIsEnumerable = Object.prototype.propertyIsEnumerable;\n\nfunction toObject(val) {\n\tif (val === null || val === undefined) {\n\t\tthrow new TypeError('Object.assign cannot be called with null or undefined');\n\t}\n\n\treturn Object(val);\n}\n\nfunction shouldUseNative() {\n\ttry {\n\t\tif (!Object.assign) {\n\t\t\treturn false;\n\t\t}\n\n\t\t// Detect buggy property enumeration order in older V8 versions.\n\n\t\t// https://bugs.chromium.org/p/v8/issues/detail?id=4118\n\t\tvar test1 = new String('abc');  // eslint-disable-line no-new-wrappers\n\t\ttest1[5] = 'de';\n\t\tif (Object.getOwnPropertyNames(test1)[0] === '5') {\n\t\t\treturn false;\n\t\t}\n\n\t\t// https://bugs.chromium.org/p/v8/issues/detail?id=3056\n\t\tvar test2 = {};\n\t\tfor (var i = 0; i < 10; i++) {\n\t\t\ttest2['_' + String.fromCharCode(i)] = i;\n\t\t}\n\t\tvar order2 = Object.getOwnPropertyNames(test2).map(function (n) {\n\t\t\treturn test2[n];\n\t\t});\n\t\tif (order2.join('') !== '0123456789') {\n\t\t\treturn false;\n\t\t}\n\n\t\t// https://bugs.chromium.org/p/v8/issues/detail?id=3056\n\t\tvar test3 = {};\n\t\t'abcdefghijklmnopqrst'.split('').forEach(function (letter) {\n\t\t\ttest3[letter] = letter;\n\t\t});\n\t\tif (Object.keys(Object.assign({}, test3)).join('') !==\n\t\t\t\t'abcdefghijklmnopqrst') {\n\t\t\treturn false;\n\t\t}\n\n\t\treturn true;\n\t} catch (err) {\n\t\t// We don't expect any of the above to throw, but better to be safe.\n\t\treturn false;\n\t}\n}\n\nmodule.exports = shouldUseNative() ? Object.assign : function (target, source) {\n\tvar from;\n\tvar to = toObject(target);\n\tvar symbols;\n\n\tfor (var s = 1; s < arguments.length; s++) {\n\t\tfrom = Object(arguments[s]);\n\n\t\tfor (var key in from) {\n\t\t\tif (hasOwnProperty.call(from, key)) {\n\t\t\t\tto[key] = from[key];\n\t\t\t}\n\t\t}\n\n\t\tif (getOwnPropertySymbols) {\n\t\t\tsymbols = getOwnPropertySymbols(from);\n\t\t\tfor (var i = 0; i < symbols.length; i++) {\n\t\t\t\tif (propIsEnumerable.call(from, symbols[i])) {\n\t\t\t\t\tto[symbols[i]] = from[symbols[i]];\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\treturn to;\n};\n\n\n//# sourceURL=webpack:///./node_modules/object-assign/index.js?");
+
+/***/ }),
+
+/***/ "./node_modules/random-normal/index.js":
+/*!*********************************************!*\
+  !*** ./node_modules/random-normal/index.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar assign = __webpack_require__(/*! object-assign */ \"./node_modules/object-assign/index.js\");\n\nfunction normalPool(options) {\n\n  var performanceCounter = 0;\n\n  do {\n\n    var idx = Math.round(normal({\n      mean: options.mean,\n      dev: options.dev\n    }));\n\n    if (idx < options.pool.length && idx >= 0) {\n      return options.pool[idx];\n    } else {\n      performanceCounter++;\n    }\n\n  } while (performanceCounter < 100);\n}\n\nfunction normal(options) {\n\n  options = assign({ mean: 0, dev: 1, pool: [] }, options);\n\n  // If a pool has been passed, then we are returning an item from that pool,\n  // using the normal distribution settings that were passed in\n  if (Array.isArray(options.pool) && options.pool.length > 0) {\n    return normalPool(options);\n  }\n\n  // The Marsaglia Polar method\n  var s;\n  var u;\n  var v;\n  var norm;\n  var mean = options.mean;\n  var dev  = options.dev;\n\n  do {\n    // U and V are from the uniform distribution on (-1, 1)\n    u = Math.random() * 2 - 1;\n    v = Math.random() * 2 - 1;\n\n    s = u * u + v * v;\n  } while (s >= 1);\n\n  // Compute the standard normal variate\n  norm = u * Math.sqrt(-2 * Math.log(s) / s);\n\n  // Shape and scale\n  return dev * norm + mean;\n}\n\nmodule.exports = normal;\n\n\n//# sourceURL=webpack:///./node_modules/random-normal/index.js?");
+
+/***/ })
+
+/******/ });

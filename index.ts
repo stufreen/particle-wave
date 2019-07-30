@@ -1,16 +1,28 @@
-import * as randomNormal from 'random-normal';
+import randomNormal from 'random-normal';
 
 const NUM_PARTICLES = 600;
 const PARTICLE_SIZE = 0.4;
 const SPEED = 20000;
 
-let particles = [];
+interface Particle {
+  x: number,
+  y: number,
+  diameter: number,
+  duration: number,
+  amplitude: number,
+  offsetY: number,
+  arc: number,
+  startTime: number,
+  colour: string,
+};
 
-function rand(low, high) {
+let particles: Particle[] = [];
+
+function rand(low: number, high: number) {
   return Math.random() * (high - low) + low;
 }
 
-function createParticle(canvas) {
+function createParticle() {
   const colour = {
     r: 255,
     g: randomNormal({ mean: 125, dev: 20 }),
@@ -30,7 +42,7 @@ function createParticle(canvas) {
   }
 }
 
-function moveParticle(particle, canvas, time) {
+function moveParticle(particle: Particle, time: number) {
   const progress = ((time - particle.startTime) % particle.duration) / particle.duration;
   return {
     ...particle,
@@ -39,8 +51,8 @@ function moveParticle(particle, canvas, time) {
   };
 }
 
-function drawParticle(particle, canvas, ctx) {
-  canvas = document.getElementById('particle-canvas');
+function drawParticle(particle: Particle, canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
+  canvas = <HTMLCanvasElement>document.getElementById('particle-canvas');
   const vh = canvas.height / 100;
 
   ctx.fillStyle = particle.colour;
@@ -57,10 +69,10 @@ function drawParticle(particle, canvas, ctx) {
   ctx.fill();
 }
 
-function draw(time, canvas, ctx) {
+function draw(time: number, canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
   // Move particles
   particles.forEach((particle, index) => {
-    particles[index] = moveParticle(particle, canvas, time);
+    particles[index] = moveParticle(particle, time);
   })
 
   // Clear the canvas
@@ -75,15 +87,15 @@ function draw(time, canvas, ctx) {
   requestAnimationFrame((time) => draw(time, canvas, ctx));
 }
 
-function initializeCanvas() {
-  let canvas = document.getElementById('particle-canvas');
-  canvas.width = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
+function initializeCanvas(): [HTMLCanvasElement, CanvasRenderingContext2D] {
+  let canvas = <HTMLCanvasElement>document.getElementById('particle-canvas');
+  canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+  canvas.height = canvas.offsetHeight * window.devicePixelRatio;
   let ctx = canvas.getContext("2d");
 
   window.addEventListener('resize', () => {
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
+    canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+    canvas.height = canvas.offsetHeight * window.devicePixelRatio;
     ctx = canvas.getContext("2d");
   })
 
@@ -95,17 +107,15 @@ function startAnimation() {
 
   // Create a bunch of particles
   for (let i = 0; i < NUM_PARTICLES; i++) {
-    particles.push(createParticle(canvas));
+    particles.push(createParticle());
   }
-
-  console.table(particles);
 
   requestAnimationFrame((time) => draw(time, canvas, ctx));
 };
 
 // Start animation when document is loaded
 (function () {
-  if (document.readystate !== 'loading') {
+  if (document.readyState !== 'loading') {
     startAnimation();
   } else {
     document.addEventListener('DOMContentLoaded', () => {
