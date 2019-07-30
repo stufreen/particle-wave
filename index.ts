@@ -52,7 +52,6 @@ function moveParticle(particle: Particle, time: number) {
 }
 
 function drawParticle(particle: Particle, canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
-  canvas = <HTMLCanvasElement>document.getElementById('particle-canvas');
   const vh = canvas.height / 100;
 
   ctx.fillStyle = particle.colour;
