@@ -1,14 +1,18 @@
 import randomNormal from 'random-normal';
-import { Scene, Renderer, Camera, Geometry, BoxGeometry, Object3D } from 'three';
+import { Scene, Renderer, Camera, Object3D } from 'three';
 
 const THREE = require('three');
+const OrbitControls = require('three-orbit-controls')(THREE)
 
-const spriteMap = new THREE.TextureLoader().load('particle.png');
-const spriteMaterial = new THREE.SpriteMaterial({ map: spriteMap, color: 0xffffff });
 
-const NUM_PARTICLES = 500;
-const PARTICLE_SIZE = 0.6;
+const NUM_PARTICLES = 4000;
+const PARTICLE_SIZE = 0.3;
 const SPEED = 20000;
+
+// const spriteMap = new THREE.TextureLoader().load('particle.png');
+// const spriteMaterial = new THREE.SpriteMaterial({ map: spriteMap, color: 0xffffff });
+// const geometry = new THREE.CircleGeometry(PARTICLE_SIZE, 8);
+const sphereGeometry = new THREE.SphereGeometry(PARTICLE_SIZE, 32, 32);
 
 interface Particle {
   duration: number,
@@ -32,21 +36,21 @@ function createParticle(scene: Scene) {
     randomNormal({ mean: 0.5, dev: 0.08 }),
     0.3
   );
-  const size = randomNormal({ mean: PARTICLE_SIZE, dev: PARTICLE_SIZE / 3 })
-  // const geometry = new THREE.SphereGeometry(size, 32, 32);
-  // const material = new THREE.MeshPhongMaterial({
-  //   color,
-  //   opacity: randomNormal({ mean: 0.9, dev: 0.2 }),
-  //   transparent: true,
-  // });
-
-  const geometry = new THREE.CircleGeometry(size, 16);
+  const scale = randomNormal({ mean: 1, dev: 1 / 3 })
   const material = new THREE.MeshBasicMaterial({
     color,
     opacity: randomNormal({ mean: 0.7, dev: 0.2 }),
     transparent: true,
   });
-  const circle = new THREE.Mesh(geometry, material);
+
+
+  // const material = new THREE.MeshBasicMaterial({
+  //   color,
+  //   opacity: randomNormal({ mean: 0.7, dev: 0.2 }),
+  //   transparent: true,
+  // });
+  const circle = new THREE.Mesh(sphereGeometry, material);
+  circle.scale.set(scale, scale, scale);
   scene.add(circle);
 
   // const sprite = new THREE.Sprite(spriteMaterial);
@@ -68,7 +72,7 @@ function moveParticle(particle: Particle, time: number) {
   const x = ((time - particle.startTime) % particle.duration) / particle.duration;
   const y = (Math.sin(x * particle.arc) * particle.amplitude) + particle.offsetY;
 
-  particle.geometry.position.set(x * 350 - 175, y, particle.z);
+  particle.geometry.position.set(x * 300 - 150, y, particle.z);
 }
 
 function draw(time: number, scene: Scene, camera: Camera, renderer: Renderer) {
@@ -85,7 +89,7 @@ function draw(time: number, scene: Scene, camera: Camera, renderer: Renderer) {
 
 function initializeCanvas(): [Scene, Camera, Renderer] {
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
   const renderer = new THREE.WebGLRenderer({
     antialias: true,
     alpha: true,
@@ -94,7 +98,11 @@ function initializeCanvas(): [Scene, Camera, Renderer] {
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
 
-  camera.position.z = 100;
+  camera.position.set(0, 20, 100)
+
+  // Optional orbit controls
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.update();
 
   return [scene, camera, renderer];
 }
