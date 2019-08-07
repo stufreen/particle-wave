@@ -5,7 +5,7 @@ const THREE = require('three');
 const OrbitControls = require('three-orbit-controls')(THREE)
 
 
-const NUM_PARTICLES = 4000;
+const NUM_PARTICLES = 3000;
 const PARTICLE_SIZE = 0.3;
 const SPEED = 20000;
 
