@@ -10,7 +10,8 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@types/random-normal": "^1.0.0",
-    "random-normal": "^1.0.0"
+    "random-normal": "^1.0.0",
+    "three": "^0.107.0"
   },
   "devDependencies": {
     "ts-loader": "^6.0.4",
